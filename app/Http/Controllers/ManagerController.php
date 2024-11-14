@@ -3,14 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\ManagerService;
 
 class ManagerController extends Controller
 {
-    public function home(){
-        return view('manager.manager_home');
+    private $managerService;
+
+    public function __construct(ManagerService $managerService){
+        $this->managerService = $managerService;
     }
 
-    public function history(Request $request){
-        return view('manager.manager_history');
+    public function home(){
+        $data['reservations'] = $this->managerService->getReservationsPanding();
+        return view('manager.manager_home')->with($data);
+    }
+
+    public function history(){
+        $data['reservations'] = $this->managerService->getReservationsAll();
+        return view('manager.manager_history')->with($data);
     }
 }

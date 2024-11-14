@@ -3,50 +3,47 @@
 @section('content')
     <h1 class="test">Оставьте вашу заявку</h1>
     <div class="container" style="width: 70%; margin-top: 50px;">
-        <div class="row">
-            <!-- Левый столбец с radio -->
-            <div class="col-md-6">
-                <h4>Выберите один из вариантов:</h4>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="optionsRadios" id="option1" value="option1">
-                    <label class="form-check-label" for="option1">Вариант 1</label>
+        <form action="{{route('client.createRequest')}}" method="post">
+            @csrf
+            <div class="row">
+                <!-- Левый столбец с radio -->
+                <div class="col-md-6">
+                    <h4>Какой специалист вам нужен:</h4>
+                    @foreach ($specializations as $el)
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="specializations" id="{{$el->id}}" value="{{$el->id}}">
+                            <label class="form-check-label" for="{{$el->id}}">{{$el->name}}</label>
+                        </div>
+                    @endforeach
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="optionsRadios" id="option2" value="option2">
-                    <label class="form-check-label" for="option2">Вариант 2</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="optionsRadios" id="option3" value="option3">
-                    <label class="form-check-label" for="option3">Вариант 3</label>
+
+                <!-- Правый столбец с checkbox -->
+                <div class="col-md-6">
+                    <h4>В какое время вам удобно:</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="reception_time[]" id="checkbox1" value="from 8 to 11">
+                        <label class="form-check-label" for="checkbox1">from 8 to 11</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="reception_time[]" id="checkbox2" value="from 11 to 13">
+                        <label class="form-check-label" for="checkbox2">from 11 to 13</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="reception_time[]" id="checkbox3" value="from 13 to 18">
+                        <label class="form-check-label" for="checkbox3">from 13 to 18</label>
+                    </div>
                 </div>
             </div>
 
-            <!-- Правый столбец с checkbox -->
-            <div class="col-md-6">
-                <h4>Выберите несколько опций:</h4>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkbox1" value="checkbox1">
-                    <label class="form-check-label" for="checkbox1">Опция 1</label>
+            <!-- Кнопки снизу -->
+            <div class="d-flex justify-content-start mt-4">
+                <div class="w-50 mr-2">
+                    <button type="reset" class="btn btn-danger w-50">Отмена</button>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkbox2" value="checkbox2">
-                    <label class="form-check-label" for="checkbox2">Опция 2</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkbox3" value="checkbox3">
-                    <label class="form-check-label" for="checkbox3">Опция 3</label>
+                <div class="w-50">
+                    <button type="submit" class="btn btn-success w-50">Сохранить</button>
                 </div>
             </div>
-        </div>
-
-        <!-- Кнопки снизу -->
-        <div class="d-flex justify-content-start mt-4">
-            <div class="w-50 mr-2">
-                <button type="button" class="btn btn-danger w-50">Отмена</button>
-            </div>
-            <div class="w-50">
-                <button type="button" class="btn btn-success w-50">Сохранить</button>
-            </div>
-        </div>
+        </form>
     </div>
 @endsection

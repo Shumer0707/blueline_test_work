@@ -6,30 +6,24 @@
         <div class="row">
           <div class="col-12">
             <ul class="list-group">
-              <li class="list-group-item">
-                <div class="d-flex justify-content-between align-items-center">
-                  <span>Slot 1</span>
-                  <span>Slot 2</span>
-                  <span>Slot 3</span>
-                  <button type="button" class="btn btn-danger btn-sm">Button</button>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="d-flex justify-content-between align-items-center">
-                  <span>Slot 1</span>
-                  <span>Slot 2</span>
-                  <span>Slot 3</span>
-                  <button type="button" class="btn btn-danger btn-sm">Button</button>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="d-flex justify-content-between align-items-center">
-                  <span>Slot 1</span>
-                  <span>Slot 2</span>
-                  <span>Slot 3</span>
-                  <button type="button" class="btn btn-danger btn-sm">Button</button>
-                </div>
-              </li>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <span>Specializations</span>
+                    <span>Time frame</span>
+                    <span>Status</span>
+                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                </li>
+                @foreach ($reservations as $el)
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                        <span>{{$el->specialization_id}}</span>
+                        <span>{{$el->preferred_slots}}</span>
+                        <span>{{$el->status}}</span>
+                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                        </div>
+                    </li>
+                @endforeach
             </ul>
           </div>
         </div>
