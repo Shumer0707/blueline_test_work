@@ -12,6 +12,9 @@
     <div class="wrapper">
         <header>
             <h1 class="test">Test</h1>
+            @if (auth()->check())
+                <p>Здравствуйте, {{ auth()->user()->name }}. Ваша роль: {{ auth()->user()->role }}</p>
+            @endif
         </header>
         <main>
             @yield('content')
