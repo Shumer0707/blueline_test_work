@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="test">Оставьте вашу заявку</h1>
+    <h1 class="test">Leave your request</h1>
     <div class="container" style="width: 70%; margin-top: 50px;">
         <form action="{{route('client.createRequest')}}" method="post">
             @csrf

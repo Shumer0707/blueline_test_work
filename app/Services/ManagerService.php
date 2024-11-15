@@ -2,11 +2,14 @@
 
 namespace App\Services;
 
+use App\Mail\ClientNotification;
+use App\Mail\ManagerNotification;
 use App\Models\Doctor;
 use App\Models\Reservation;
 use App\Models\Specialization;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ManagerService
 {
@@ -24,23 +27,67 @@ class ManagerService
 
     //Updating the application
     public function updateRequest($validatedData){
-        $Reservation = Reservation::find($validatedData['id']); // Make sure the request has 'id'
-        if ($Reservation) {
+
+        $reservation = Reservation::find($validatedData['id']); // Make sure the request has 'id'
+
+        if ($reservation) {
+
             if($validatedData['status'] === 'approved'){
-                $Reservation->status = $validatedData['status'];
-                $Reservation->preferred_slots = json_encode($validatedData['time_slot'], true);
-                $Reservation->doctor = $validatedData['doctor'];
-                $Reservation->save();
+
+                $reservation->status = $validatedData['status'];
+                $reservation->preferred_slots = json_encode($validatedData['time_slot'], true);
+                $reservation->doctor = $validatedData['doctor'];
+                $reservation->save();
+
+                $this -> sendNotifications($reservation);
+
                 return 'success';
+
             }
+
             if($validatedData['status'] === 'refuse'){
-                $Reservation->status = $validatedData['status'];
-                $Reservation->save();
+
+                $reservation->status = $validatedData['status'];
+                $reservation->save();
+
+                $this -> sendNotifications($reservation);
+
                 return 'success';
             }
+
             return 'error';
+
         } else {
             return 'error';
         }
     }
+
+    public function sendNotifications($reservation)
+{
+    // Data for the client
+    $clientDetails = [
+        'message' => 'Ваш заказ успешно обработан.',
+        'name' => $reservation->user['name'],
+        'status' => $reservation['status'],
+        'specialization' => $reservation->specialization['name'],
+        'doctors' => $reservation['doctor'],
+        'preferred_slots' => $reservation['preferred_slots'],
+    ];
+
+    // Data for the manager
+    $managerDetails = [
+        'message' => 'Поступил новый заказ от клиента.',
+        'name' => $reservation->user['name'],
+        'status' => $reservation['status'],
+        'specialization' => $reservation->specialization['name'],
+        'doctors' => $reservation['doctor'],
+        'preferred_slots' => $reservation['preferred_slots'],
+    ];
+
+    // Sending a letter to the client
+    Mail::to($reservation->user['email'])->send(new ClientNotification($clientDetails));
+
+    // Send a letter to the manager
+    Mail::to('manager@example.com')->send(new ManagerNotification($managerDetails));
+}
 }

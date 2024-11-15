@@ -4,6 +4,11 @@
     <h1>Заявки на рассмотрении</h1>
     <div class="container" style="width: 70%; margin: auto;">
         <div class="container" style="width: 70%; margin: auto;">
+            @if (!empty($update_response))
+                <div class="alert alert-success">
+                    {{ $update_response }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-12">
                     @foreach ($reservations as $el)

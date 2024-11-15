@@ -24,7 +24,6 @@ class ClientFormRequest extends FormRequest
         return [
             'specializations' => 'required|integer',
             'reception_time' => 'required|array|min:1|max:5',
-            'id' => 'required|integer|max:11',
         ];
     }
 }

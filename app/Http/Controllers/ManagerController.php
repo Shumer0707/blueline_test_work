@@ -16,6 +16,9 @@ class ManagerController extends Controller
 
     public function home(){
         $data['reservations'] = $this->managerService->getReservationsPanding();
+
+        $data['update_response'] = session('update_response', null);
+
         return view('manager.manager_home')->with($data);
     }
 
@@ -26,8 +29,11 @@ class ManagerController extends Controller
 
     public function updateRequest(ManagerFormRequest $request){
         $validatedData = $request->validated();
-        $data['answer'] = $this->managerService->updateRequest($validatedData);
-        $data['reservations'] = $this->managerService->getReservationsPanding();
-        return view('manager.manager_home')->with($data);
+        $answer = $this->managerService->updateRequest($validatedData);
+
+        // Save the response in the session
+        session()->flash('update_response', $answer);
+
+        return redirect(route('manager.home'));
     }
 }
