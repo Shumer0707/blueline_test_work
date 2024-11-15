@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ManagerFormRequest;
-use Illuminate\Http\Request;
 use App\Services\ManagerService;
 
 class ManagerController extends Controller

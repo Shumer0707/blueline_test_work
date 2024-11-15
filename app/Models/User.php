@@ -21,6 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
     ];
 
@@ -58,18 +59,18 @@ class User extends Authenticatable
         $this->attributes['name'] = Crypt::encryptString($value);
     }
 
-    public function setEmailAttribute($value)
-    {
-        $this->attributes['email'] = Crypt::encryptString($value);
-    }
+    // public function setEmailAttribute($value)
+    // {
+    //     $this->attributes['email'] = Crypt::encryptString($value);
+    // }
 
     public function getNameAttribute($value)
     {
         return Crypt::decryptString($value);
     }
 
-    public function getEmailAttribute($value)
-    {
-        return Crypt::decryptString($value);
-    }
+    // public function getEmailAttribute($value)
+    // {
+    //     return Crypt::decryptString($value);
+    // }
 }

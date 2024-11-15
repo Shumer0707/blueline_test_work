@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('specialization_id')->constrained();
             $table->string('status')->default('pending');
             $table->json('preferred_slots');
+            $table->string('doctor')->nullable();
             $table->timestamps();
         });
     }

@@ -2,9 +2,6 @@
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ManagerController;
-use App\Mail\ClientNotification;
-use App\Mail\ManagerNotification;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();

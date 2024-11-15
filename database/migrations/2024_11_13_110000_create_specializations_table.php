@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Specialization;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,21 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Specialization::insert([
+            [
+                'name' => 'pulmonologist',
+            ],
+            [
+                'name' => 'orthopedist',
+            ],
+            [
+                'name' => 'dermatologist',
+            ],
+            [
+                'name' => 'venereologist',
+            ],
+        ]);
     }
 
     /**
