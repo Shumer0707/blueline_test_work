@@ -13,6 +13,10 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::group(['middleware' => ['auth', 'role:manager']], function () { // Роуты для менеджера
     Route::get('/manager/home', [ManagerController::class, 'home'])->name('manager.home');
     Route::get('/manager/history', [ManagerController::class, 'history'])->name('manager.history');
+    // Route::post('/manager/updateRequest', function () {
+    //     return 'Jora';
+    // })->name('manager.updateRequest');
+    Route::post('/manager/updateRequest', [ManagerController::class, 'updateRequest'])->name('manager.updateRequest');
 });
 
 Route::group(['middleware' => ['auth', 'role:client']], function () { // Роуты для клиента

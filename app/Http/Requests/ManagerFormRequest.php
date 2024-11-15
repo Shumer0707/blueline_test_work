@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClientFormRequest extends FormRequest
+class ManagerFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true; // Убедитесь, что возвращаете true, если валидация нужна для всех пользователей.
+        return true;
     }
 
     /**
@@ -22,9 +22,10 @@ class ClientFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'specializations' => 'required|integer',
-            'reception_time' => 'required|array|min:1|max:5',
             'id' => 'required|integer|max:11',
+            'time_slot' => 'required|string|max:100',
+            'doctor' => 'required|string|max:100',
+            'status' => 'required|string|max:100'
         ];
     }
 }

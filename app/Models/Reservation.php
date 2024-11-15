@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
+    protected $fillable = [
+        'user_id ',
+        'specialization_id ',
+        'status',
+        'preferred_slots',
+        'doctor'
+    ];
+
     // get a specialization
     public function specialization()
     {
