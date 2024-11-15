@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Заявки на рассмотрении</h1>
+    <h1>Applications under consideration</h1>
     <div class="container" style="width: 70%; margin: auto;">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="container" style="width: 70%; margin: auto;">
             @if (!empty($update_response))
                 <div class="alert alert-success">
@@ -19,8 +28,8 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-start mb-3">
                                 <div style="flex: 1; text-align: left;">
-                                    <strong>Username:</strong><br>
-                                    {{ $el->user['name'] }}
+                                    <strong>Time of creation:</strong><br>
+                                    {{ $el->user['created_at'] }}
                                 </div>
                                 <div style="flex: 1; text-align: left;">
                                     <strong>Specialization:</strong><br>

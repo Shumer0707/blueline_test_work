@@ -6,9 +6,9 @@
         <form action="{{route('client.createRequest')}}" method="post">
             @csrf
             <div class="row">
-                <!-- Левый столбец с radio -->
+                <!-- Left column radio -->
                 <div class="col-md-6">
-                    <h4>Какой специалист вам нужен:</h4>
+                    <h4>What kind of specialist do you need?:</h4>
                     @foreach ($specializations as $el)
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="specializations" id="{{$el->id}}" value="{{$el->id}}">
@@ -17,9 +17,9 @@
                     @endforeach
                 </div>
 
-                <!-- Правый столбец с checkbox -->
+                <!-- Right column checkbox -->
                 <div class="col-md-6">
-                    <h4>В какое время вам удобно:</h4>
+                    <h4>What time is convenient for you?:</h4>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="reception_time[]" id="checkbox1" value="from 8 to 11">
                         <label class="form-check-label" for="checkbox1">from 8 to 11</label>
@@ -35,13 +35,12 @@
                 </div>
             </div>
 
-            <!-- Кнопки снизу -->
             <div class="d-flex justify-content-start mt-4">
                 <div class="w-50 mr-2">
-                    <button type="reset" class="btn btn-danger w-50">Отмена</button>
+                    <button type="reset" class="btn btn-danger w-50">Cancel</button>
                 </div>
                 <div class="w-50">
-                    <button type="submit" class="btn btn-success w-50">Сохранить</button>
+                    <button type="submit" class="btn btn-success w-50">Submit</button>
                 </div>
             </div>
         </form>

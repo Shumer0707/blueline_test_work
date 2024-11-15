@@ -22,7 +22,7 @@ class ManagerFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer|max:11',
+            'id' => 'required|integer',
             'time_slot' => 'required|string|max:100',
             'doctor' => 'required|string|max:100',
             'status' => 'required|string|max:100'

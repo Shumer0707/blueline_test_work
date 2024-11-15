@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Все заявки</h1>
+    <h1>All applications</h1>
     <div class="container" style="width: 70%;">
         <div class="row">
           <div class="col-12">
